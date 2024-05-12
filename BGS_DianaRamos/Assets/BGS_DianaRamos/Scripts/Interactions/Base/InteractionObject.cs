@@ -12,6 +12,7 @@ public class InteractionObject : MonoBehaviour
 
     #region private variables
     private bool _canInteract;
+    private string _idInteraction;
     #endregion
 
     #region public properties
@@ -29,6 +30,7 @@ public class InteractionObject : MonoBehaviour
         {
             _interaction.SetActive(true);
             _canInteract = true;
+            InteractionsManager.Instance.CurrentInteractionObject = this;
         }
     }
 
@@ -38,6 +40,7 @@ public class InteractionObject : MonoBehaviour
         {
             _interaction.SetActive(false);
             _canInteract = false;
+            InteractionsManager.Instance.CurrentInteractionObject = null;
         }
     }
     #endregion
