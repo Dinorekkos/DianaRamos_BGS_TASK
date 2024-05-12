@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Out_2
+  m_Name: Out_2_Idle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -23,7 +23,7 @@ AnimationClip:
     - time: 0
       value: {fileID: -2050433511, guid: 19d3ac47a8b6cb24ebc957c9cea687f7, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Torso
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -35,7 +35,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 3869152129
       attribute: 0
       script: {fileID: 0}
       typeID: 212

@@ -21,9 +21,12 @@ namespace Dino.TopDown2D
         private Animator _animator;
         private string _horizontalAnim = "Horizontal";
         private string _verticalAnim = "Vertical";
+        
         private string _lastHorizontalAnim = "LastHorizontal";
         private string _lastVerticalAnim = "LastVertical";
-
+        
+        private bool _isMoving;
+        
         #endregion
 
         void Start()
@@ -43,9 +46,12 @@ namespace Dino.TopDown2D
             
             if (_movementVector2 != Vector2.zero)
             {
-                // _animator.SetFloat(_lastHorizontalAnim, _movementVector2.x);
-                // _animator.SetFloat(_lastVerticalAnim, _movementVector2.y);
+                _animator.SetFloat(_lastHorizontalAnim, _movementVector2.x);
+                _animator.SetFloat(_lastVerticalAnim, _movementVector2.y);
             }
+            
+            _isMoving = _movementVector2 != Vector2.zero;
+            _animator.SetBool("Moving", _isMoving);
 
         }
     }
