@@ -37,16 +37,7 @@ public class ClotheStoreUI : MenuWindow
         InitializeItems();
         UpdateTabContent();
         
-        // UpdateCurrencyText(CurrencyManager.Instance.Currency);
-        // CurrencyManager.Instance.OnCurrencyChanged += UpdateCurrencyText;
         
-
-        
-    }
-
-    private void UpdateCurrencyText(int currency)
-    {
-        // _currencyText.text = currency.ToString();
     }
 
     private void CloseWindow()
@@ -115,6 +106,17 @@ public class ClotheStoreUI : MenuWindow
         }
 
     }
+
+    public void SetHairsColor(Color color)
+    {
+        foreach (var item in _hairItems)
+        {
+            item.SetColor(color);
+            ButtonOptimizedAnim buttonOptimizedAnim = item.GetComponent<ButtonOptimizedAnim>();
+            buttonOptimizedAnim.GetTargetColors();
+        }
+    }
+        
 
    
 }

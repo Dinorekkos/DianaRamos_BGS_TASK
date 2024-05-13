@@ -21,6 +21,7 @@ public class ItemClotheStore : MonoBehaviour
     private string _itemID; 
     private int _itemPrice;
     private int _itemIndex;
+    private Color _color;
     #endregion
     
     #region public methods
@@ -29,6 +30,7 @@ public class ItemClotheStore : MonoBehaviour
     {
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnButtonClicked);
+        _color = _icon.color;
 
     }
 
@@ -54,11 +56,16 @@ public class ItemClotheStore : MonoBehaviour
     private void OnButtonClicked()
     {
         CurrencyManager.Instance.SpendCurrency(_itemPrice);
-        CharacterPartSelector.Instance.ChangeBodyPart(_clotheType.ToString(), _itemIndex);
+        CharacterPartSelector.Instance.ChangeBodyPart(_clotheType.ToString(), _itemIndex, _color);
         
         
     }
 
     #endregion
-    
+
+    public void SetColor(Color color)
+    {
+        _color = color;
+        _icon.color = color;
+    }
 }

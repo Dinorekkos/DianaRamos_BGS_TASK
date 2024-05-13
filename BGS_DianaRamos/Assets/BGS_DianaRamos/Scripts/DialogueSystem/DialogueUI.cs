@@ -17,13 +17,14 @@ namespace DINO.TopDown2D.BSG
             base.Initialize();
             _closeButton.onClick.AddListener(() => CloseWindow());
             _openStoreButton.onClick.AddListener(() => OpenStore());
+            
 
         }
 
         private void OpenStore()
         {
-            MenuManager.Intance.OpenWindow(MenuManager.Intance.GetWindow("clothe.store"));
             HideWindow();
+            StartCoroutine(DelayedOpenStore());
         }
 
         private void CloseWindow()
@@ -32,6 +33,14 @@ namespace DINO.TopDown2D.BSG
             PlayerMovement.Instance.EnableMovement(true);
         }
 
+        private IEnumerator DelayedOpenStore()
+        {
+            yield return new WaitForSeconds(0.5f);
+            MenuManager.Intance.OpenWindow(MenuManager.Intance.GetWindow("clothe.store"));
+
+           
+        }
+        
        
     }
 }
