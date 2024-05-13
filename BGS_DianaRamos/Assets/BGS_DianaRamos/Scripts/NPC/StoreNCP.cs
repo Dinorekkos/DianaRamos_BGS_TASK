@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Dino.TopDown2D;
+using DINO.TopDown2D.BSG;
 using DINO.Utility;
 using UnityEngine;
 
@@ -12,9 +12,12 @@ public class StoreNCP : InteractionObject
     {        
         if(InteractionsManager.Instance.CurrentInteractionObject != this) return;
         base.Interact();
-        Debug.Log("Interacting with Store".SetColor("#89FF89"));
         
         MenuManager.Intance.OpenWindow(MenuManager.Intance.GetWindow(_storeName));
+        
+        PlayerMovement.Instance.EnableMovement(false);
+        Vector2 directionDown = new Vector2(0, -1);
+        PlayerMovement.Instance.SetAnimToFixedDirection(directionDown);
     }
   
     

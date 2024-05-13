@@ -1,12 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Dino.TopDown2D;
 using UnityEngine;
 
-namespace Dino.TopDown2D
+namespace DINO.TopDown2D.BSG
 {
     public class PlayerMovement : MonoBehaviour
     {
+        #region Singleton
+
+        private static PlayerMovement _instance;
+        
+        public static PlayerMovement Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<PlayerMovement>();
+                    if (_instance == null)
+                    {
+                        GameObject go = new GameObject();
+                        go.name = "PlayerMovement";
+                        _instance = go.AddComponent<PlayerMovement>();
+                    }
+                }
+
+                return _instance;
+            }
+        }
+        
+
+        #endregion
+        
         #region SerializaedFields
 
         [SerializeField] private float _moveSpeed = 5f;
@@ -26,6 +53,11 @@ namespace Dino.TopDown2D
         private bool _canMove = true;
         
         #endregion
+
+        private void Awake()
+        {
+            _instance = this;
+        }
 
         void Start()
         {
@@ -51,10 +83,15 @@ namespace Dino.TopDown2D
 
         }
         
-        private void EnableMovement(bool enable)
+        public void EnableMovement(bool enable)
         {
             _canMove = enable;
         }
-       
+        public void SetAnimToFixedDirection(Vector2 direction)
+        {
+            _animator.SetFloat(_horizontalAnim, direction.x);
+            _animator.SetFloat(_verticalAnim, direction.y);
+        }
+        
     }
 }

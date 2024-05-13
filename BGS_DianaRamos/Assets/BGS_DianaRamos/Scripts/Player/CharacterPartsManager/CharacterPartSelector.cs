@@ -4,108 +4,118 @@ using System.Collections.Generic;
 using DINO.Utility;
 using UnityEngine;
 
-public class CharacterPartSelector : MonoBehaviour
+namespace DINO.TopDown2D.BSG
 {
-    #region Singleton
-    private static CharacterPartSelector _instance;
-    public static CharacterPartSelector Instance
+    public class CharacterPartSelector : MonoBehaviour
     {
-        get
+        #region Singleton
+
+        private static CharacterPartSelector _instance;
+
+        public static CharacterPartSelector Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindObjectOfType<CharacterPartSelector>();
                 if (_instance == null)
                 {
-                    GameObject go = new GameObject();
-                    go.name = "CharacterPartSelector";
-                    _instance = go.AddComponent<CharacterPartSelector>();
+                    _instance = FindObjectOfType<CharacterPartSelector>();
+                    if (_instance == null)
+                    {
+                        GameObject go = new GameObject();
+                        go.name = "CharacterPartSelector";
+                        _instance = go.AddComponent<CharacterPartSelector>();
+                    }
                 }
+
+                return _instance;
+            }
+        }
+
+        #endregion
+
+        #region Serialized Fields
+
+        [SerializeField] private CharacterBodyData _characterBodyData;
+        [SerializeField] private BodyPartSelection[] bodyPartSelections;
+
+        #endregion
+
+        #region Public variables
+
+        public string _testBodyPart;
+        public int _testCharacterPartData;
+
+        public Action<Color> OnColorChange;
+        public Action OnBodyPartUpdate;
+
+        #endregion
+
+
+        private void Awake()
+        {
+            _instance = this;
+        }
+
+        private void Start()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            for (int i = 0; i < bodyPartSelections.Length; i++)
+            {
+                GetCurrentBodyParts(i);
+            }
+        }
+
+        public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex, Color color = default)
+        {
+            int bodyPartIndex = Array.FindIndex(bodyPartSelections, bp => bp.bodyPartName == bodyPartName);
+            if (bodyPartIndex == -1)
+            {
+                Debug.Log($"No se encontró la parte del cuerpo: {bodyPartName}");
+                return;
             }
 
-            return _instance;
+            bodyPartSelections[bodyPartIndex].bodyPartCurrentIndex = newCharacterPartDataIndex;
+            UpdateCurrentPart(bodyPartIndex);
         }
-    }
-    #endregion
-    
-    #region Serialized Fields
-    [SerializeField] private CharacterBodyData _characterBodyData;
-    [SerializeField] private BodyPartSelection[] bodyPartSelections;
-    #endregion
 
-    #region Public variables
-    public string _testBodyPart; 
-    public int _testCharacterPartData;
-    
-    public Action<Color> OnColorChange;
-    public Action OnBodyPartUpdate;
-    #endregion
-    
 
-    private void Awake()
-    {
-        _instance = this;
-    }
-
-    private void Start()
-    {
-        Initialize();
-    }
-
-    private void Initialize()
-    {
-        for (int i = 0; i < bodyPartSelections.Length; i++)
+        private void GetCurrentBodyParts(int partIndex)
         {
-            GetCurrentBodyParts(i);
+            BodyPartSelection currentBodyPartSelection = bodyPartSelections[partIndex];
+            BodyPart currentBodyPart = _characterBodyData.characterBodyParts[partIndex];
+            int currentBodyPartAnimationID = currentBodyPart.CharacterPartData.BodyPartAnimationID;
+            currentBodyPartSelection.bodyPartCurrentIndex = currentBodyPartAnimationID;
+
+            // Debug.Log("Current Body Part: ".SetColor("") + currentBodyPartSelection.bodyPartName + " : " + currentBodyPartAnimationID);
+
         }
-    }
-    
-    public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex, Color color = default)
-    {
-        int bodyPartIndex = Array.FindIndex(bodyPartSelections, bp => bp.bodyPartName == bodyPartName);
-        if (bodyPartIndex == -1)
+
+        private void UpdateCurrentPart(int partIndex, Color color = default)
         {
-            Debug.Log($"No se encontró la parte del cuerpo: {bodyPartName}");
-            return;
+            BodyPartSelection currentSelection = bodyPartSelections[partIndex];
+            int currentIndex = currentSelection.bodyPartCurrentIndex;
+            CharacterPartData currentPartData = currentSelection.CharacterPartOptions[currentIndex];
+            _characterBodyData.characterBodyParts[partIndex].CharacterPartData = currentPartData;
+
+            OnBodyPartUpdate?.Invoke();
+            OnColorChange?.Invoke(color);
+            // Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
+
         }
 
-        bodyPartSelections[bodyPartIndex].bodyPartCurrentIndex = newCharacterPartDataIndex;
-        UpdateCurrentPart(bodyPartIndex);
-    }
-    
-    
-    private void GetCurrentBodyParts(int partIndex)
-    {
-        BodyPartSelection currentBodyPartSelection = bodyPartSelections[partIndex];
-        BodyPart currentBodyPart = _characterBodyData.characterBodyParts[partIndex];
-        int currentBodyPartAnimationID = currentBodyPart.CharacterPartData.BodyPartAnimationID;
-        currentBodyPartSelection.bodyPartCurrentIndex = currentBodyPartAnimationID;
-        
-        // Debug.Log("Current Body Part: ".SetColor("") + currentBodyPartSelection.bodyPartName + " : " + currentBodyPartAnimationID);
-        
-    }
-    
-    private void UpdateCurrentPart(int partIndex, Color color = default)
-    {
-        BodyPartSelection currentSelection = bodyPartSelections[partIndex];
-        int currentIndex = currentSelection.bodyPartCurrentIndex;
-        CharacterPartData currentPartData = currentSelection.CharacterPartOptions[currentIndex];
-        _characterBodyData.characterBodyParts[partIndex].CharacterPartData = currentPartData;
-        
-        OnBodyPartUpdate?.Invoke();
-        OnColorChange?.Invoke(color);
-        // Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
-        
+
+
     }
 
-    
-    
-}
-
-[Serializable]
-public class BodyPartSelection
-{
-    public string bodyPartName;
-    public CharacterPartData[] CharacterPartOptions;
-    [HideInInspector] public int bodyPartCurrentIndex;
+    [Serializable]
+    public class BodyPartSelection
+    {
+        public string bodyPartName;
+        public CharacterPartData[] CharacterPartOptions;
+        [HideInInspector] public int bodyPartCurrentIndex;
+    }
 }

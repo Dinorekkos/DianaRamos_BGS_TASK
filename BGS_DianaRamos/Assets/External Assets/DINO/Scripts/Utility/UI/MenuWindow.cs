@@ -52,6 +52,7 @@ namespace DINO.Utility
         protected virtual void Initialize()
         {
             canvas.enabled = false;
+            windowTransform.localScale = Vector3.zero;
 
         }
 
