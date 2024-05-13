@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static DialogueManager Instance;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
