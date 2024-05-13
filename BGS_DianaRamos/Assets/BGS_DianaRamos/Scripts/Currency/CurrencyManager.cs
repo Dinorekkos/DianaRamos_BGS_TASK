@@ -8,6 +8,7 @@ namespace DINO.TopDown2D.BSG
     public class CurrencyManager : MonoBehaviour
     {
         [SerializeField] private int initialCurrency = 0;
+        [SerializeField] private RewardManager rewardManager;
 
         public int Currency { get; private set; }
         public static CurrencyManager Instance { get; private set; }
@@ -43,6 +44,7 @@ namespace DINO.TopDown2D.BSG
         {
             Currency += amount;
             OnCurrencyChanged?.Invoke(Currency);
+            CountCoins();
         }
 
         public void SpendCurrency(int amount)
@@ -52,6 +54,12 @@ namespace DINO.TopDown2D.BSG
                 Currency -= amount;
                 OnCurrencyChanged?.Invoke(Currency);
             }
+        }
+        
+        public void CountCoins()
+        {
+            if(rewardManager != null)
+                rewardManager.CountCoins();
         }
     }
 }

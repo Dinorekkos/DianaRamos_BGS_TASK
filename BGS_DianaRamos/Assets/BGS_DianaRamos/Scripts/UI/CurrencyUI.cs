@@ -17,8 +17,6 @@ public class CurrencyUI : MonoBehaviour
     private void UpdateCurrencyText(int currency)
     {
         _currencyText.text = currency.ToString();
-        _currencyText.transform.DOShakeScale(0.5f, 0.2f, 10, 90, false).SetLoops(1, LoopType.Yoyo);
-        _currencyIcon.transform.DOShakeScale(0.5f, 0.2f, 10, 90, false).SetLoops(1, LoopType.Yoyo);
     }
 
 }
