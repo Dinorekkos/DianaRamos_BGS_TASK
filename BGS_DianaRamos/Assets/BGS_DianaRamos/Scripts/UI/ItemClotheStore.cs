@@ -20,6 +20,7 @@ public class ItemClotheStore : MonoBehaviour
     private ClotheType _clotheType;
     private string _itemID; 
     private int _itemPrice;
+    private int _itemIndex;
     #endregion
     
     #region public methods
@@ -31,13 +32,15 @@ public class ItemClotheStore : MonoBehaviour
 
     }
 
-    public void Initialize(string itemID, Sprite itemSprite, int itemPrice, ClotheType clotheType)
+    public void Initialize(string itemID, Sprite itemSprite, int itemPrice, ClotheType clotheType, int itemIndex)
     {
         _itemID = itemID;
         _icon.sprite = itemSprite;
         _itemPrice = itemPrice;
         _itemCost.text = itemPrice.ToString();
         _clotheType = clotheType;
+        _itemIndex = itemIndex;
+        
         
         UpdateButtonState();
     }
@@ -51,6 +54,9 @@ public class ItemClotheStore : MonoBehaviour
     private void OnButtonClicked()
     {
         CurrencyManager.Instance.SpendCurrency(_itemPrice);
+        CharacterPartSelector.Instance.ChangeBodyPart(_clotheType.ToString(), _itemIndex);
+        
+        
     }
 
     #endregion

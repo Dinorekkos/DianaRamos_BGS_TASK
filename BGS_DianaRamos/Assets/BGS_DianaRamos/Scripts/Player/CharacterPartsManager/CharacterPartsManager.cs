@@ -38,6 +38,9 @@ namespace DINO.TopDown2D.BSG
         {
             Initialize();
         }
+        #endregion
+
+        #region private methods
 
         private void Initialize()
         {
@@ -52,15 +55,40 @@ namespace DINO.TopDown2D.BSG
             SetBodyParts();
 
             CharacterPartSelector.Instance.OnBodyPartUpdate += SetBodyParts;
+            
+            EnableHairRenderer(false);
+            EnableTorsoRenderer(false);
         }
 
-        #endregion
 
-
-        #region public methods
-
-        private void SetBodyParts()
+        
+        private void EnableHairRenderer(bool enable)
         {
+            _hairSpriteRenderer.enabled = enable;
+        }
+        
+        private void EnableTorsoRenderer(bool enable)
+        {
+            _torsoSpriteRenderer.enabled = enable;
+        }
+
+        private void SetColor(Color color)
+        {
+
+        }
+        
+        private void SetBodyParts(ClotheType clotheType = default)
+        {
+            switch (clotheType)
+            {
+                case ClotheType.Hair:
+                    EnableHairRenderer(true);
+                    break;
+                case ClotheType.Torso:
+                    EnableTorsoRenderer(true);
+                    break;
+            }
+            
             for (int partIndex = 0; partIndex < bodyPartTypes.Length; partIndex++)
             {
                 string partType = bodyPartTypes[partIndex];
@@ -81,11 +109,8 @@ namespace DINO.TopDown2D.BSG
             }
 
             _animatorOverrideController.ApplyOverrides(_defaultAnimationClips);
-        }
-
-        private void SetColor(Color color)
-        {
-
+            
+            
         }
 
         #endregion

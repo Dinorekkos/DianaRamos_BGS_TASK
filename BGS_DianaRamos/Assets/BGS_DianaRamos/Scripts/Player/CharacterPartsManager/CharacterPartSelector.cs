@@ -46,7 +46,7 @@ namespace DINO.TopDown2D.BSG
         public int _testCharacterPartData;
 
         public Action<Color> OnColorChange;
-        public Action OnBodyPartUpdate;
+        public Action<ClotheType> OnBodyPartUpdate;
 
         #endregion
 
@@ -74,12 +74,17 @@ namespace DINO.TopDown2D.BSG
             int bodyPartIndex = Array.FindIndex(bodyPartSelections, bp => bp.bodyPartName == bodyPartName);
             if (bodyPartIndex == -1)
             {
-                Debug.Log($"No se encontró la parte del cuerpo: {bodyPartName}");
+                Debug.Log($"Error no body part: {bodyPartName}");
                 return;
             }
 
             bodyPartSelections[bodyPartIndex].bodyPartCurrentIndex = newCharacterPartDataIndex;
-            UpdateCurrentPart(bodyPartIndex);
+            ClotheType clotheType = (ClotheType) Enum.Parse(typeof(ClotheType), bodyPartName);
+            
+            UpdateCurrentPart(bodyPartIndex, clotheType, color);
+
+            
+            
         }
 
 
@@ -94,14 +99,14 @@ namespace DINO.TopDown2D.BSG
 
         }
 
-        private void UpdateCurrentPart(int partIndex, Color color = default)
+        private void UpdateCurrentPart(int partIndex, ClotheType clotheType, Color color = default)
         {
             BodyPartSelection currentSelection = bodyPartSelections[partIndex];
             int currentIndex = currentSelection.bodyPartCurrentIndex;
             CharacterPartData currentPartData = currentSelection.CharacterPartOptions[currentIndex];
             _characterBodyData.characterBodyParts[partIndex].CharacterPartData = currentPartData;
 
-            OnBodyPartUpdate?.Invoke();
+            OnBodyPartUpdate?.Invoke(clotheType);
             OnColorChange?.Invoke(color);
             // Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
 

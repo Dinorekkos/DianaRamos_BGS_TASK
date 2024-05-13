@@ -86,6 +86,8 @@ namespace DINO.TopDown2D.BSG
         public void EnableMovement(bool enable)
         {
             _canMove = enable;
+            _rigidbody2D.velocity = Vector2.zero;
+            _animator.SetBool("Moving", false);
         }
         public void SetAnimToFixedDirection(Vector2 direction)
         {

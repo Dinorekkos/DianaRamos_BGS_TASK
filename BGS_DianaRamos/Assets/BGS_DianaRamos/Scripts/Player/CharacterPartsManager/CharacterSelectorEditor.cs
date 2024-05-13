@@ -18,7 +18,7 @@ public class CharacterSelectorEditor : Editor
         
         if (GUILayout.Button("Select New Body Part"))
         {
-            _characterPartSelector.ChangeBodyPart(_characterPartSelector._testBodyPart, _characterPartSelector._testCharacterPartData);
+            _characterPartSelector.ChangeBodyPart(_characterPartSelector._testBodyPart, 0);
         }
         
         

@@ -5273,7 +5273,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 813fadef6e424fb4ea1c2582111a4312, type: 2}
     bodyPartCurrentIndex: 0
   _testBodyPart: Hair
-  _testCharacterPartData: 1
+  _testCharacterPartData: 0
 --- !u!1 &788980809
 GameObject:
   m_ObjectHideFlags: 0
@@ -8820,6 +8820,10 @@ PrefabInstance:
     - target: {fileID: 7130475101311364825, guid: de7690085363213408e5cdf69a6d75da, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747304867157418780, guid: de7690085363213408e5cdf69a6d75da, type: 3}
+      propertyPath: _gemsToMine
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8529473268181057465, guid: de7690085363213408e5cdf69a6d75da, type: 3}
       propertyPath: m_AnchorMax.y

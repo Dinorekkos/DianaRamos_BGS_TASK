@@ -17,12 +17,19 @@ namespace DINO.TopDown2D.BSG
 
         private bool _canInteract;
         private string _idInteraction;
+        private bool _isInteracting;
 
         #endregion
 
         #region public properties
 
         public bool CanInteract => _canInteract;
+
+        public bool IsInteracting
+        {
+            get => _isInteracting;
+            set => _isInteracting = value;
+        }
 
         #endregion
 
@@ -63,12 +70,11 @@ namespace DINO.TopDown2D.BSG
         protected virtual void OnStopInteracting()
         {
             _interaction.SetActive(false);
-            _canInteract = false;
-            InteractionsManager.Instance.CurrentInteractionObject = null;
+            _isInteracting = false;
+            _canInteract = false; 
+            if(InteractionsManager.Instance != null) InteractionsManager.Instance.CurrentInteractionObject = null;
         }
-
-
-
+        
         protected virtual void Initialize()
         {
             _interaction.SetActive(false);
@@ -77,7 +83,9 @@ namespace DINO.TopDown2D.BSG
 
         protected virtual void Interact()
         {
+            // if (_isInteracting)return;
             if (!_canInteract) return;
+            _isInteracting = true;
             _interaction.SetActive(false);
 
         }

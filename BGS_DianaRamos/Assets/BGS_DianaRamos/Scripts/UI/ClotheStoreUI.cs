@@ -109,7 +109,8 @@ public class ClotheStoreUI : MenuWindow
 
         foreach (var pair in pairedItems)
         {
-            pair.Item.Initialize(pair.ItemData.itemID, pair.ItemData.itemSprite, pair.ItemData.itemPrice, clotheType);
+            int index = items.IndexOf(pair.Item);
+            pair.Item.Initialize(pair.ItemData.itemID, pair.ItemData.itemSprite, pair.ItemData.itemPrice, clotheType, index);
 
         }
 
