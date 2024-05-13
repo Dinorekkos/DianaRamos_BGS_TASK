@@ -8,7 +8,8 @@ namespace DINO.Utility
     {
         #region Serialized Fields
 
-        [Header("Menu Window Settings")]
+        [Header("Menu Window Settings")] 
+        [SerializeField] private string windowID;
         [SerializeField] private Transform windowTransform;
         [SerializeField] private Canvas canvas;
         [SerializeField] private float duration = 0.5f;
@@ -18,7 +19,15 @@ namespace DINO.Utility
 
         #endregion
 
+        #region private variables
+
+        public bool IsShowing => canvas.enabled;
+
+        #endregion
+
         #region public variables
+        
+        public string WindowName => windowID;
 
         public Action OnStartShowingWindow;
         public Action OnFinishedShowingWindow;
@@ -26,6 +35,8 @@ namespace DINO.Utility
         public Action OnFinishedHideWindow;
 
         #endregion
+        
+        
 
         #region unity methods
 
@@ -41,6 +52,7 @@ namespace DINO.Utility
         protected virtual void Initialize()
         {
             canvas.enabled = false;
+            windowTransform.localScale = Vector3.zero;
 
         }
 

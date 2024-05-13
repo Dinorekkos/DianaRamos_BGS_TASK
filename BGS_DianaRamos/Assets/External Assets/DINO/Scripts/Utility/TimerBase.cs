@@ -27,6 +27,7 @@ namespace DINO.Utility
         private float _updateInterval = 1f; 
         private float _elapsedTime;
         private bool _isCountdown;
+        private float _timerValue;
         #endregion
         
         #region unity methods
@@ -62,10 +63,15 @@ namespace DINO.Utility
 
         #region public methods
 
+        public float GetTimePercentage()
+        {
+            return  _currentTimer / _timerValue;
+        }   
         public void StartTimer(float timer,string message = "", bool isCountDown = false, float intervalUpdate = 1f)
         {
             if(isCountDown) _currentTimer = timer;
             
+            _timerValue = timer;
             _updateInterval = intervalUpdate;
             _isCountdown = isCountDown;
             

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DINO.TopDown2D.BSG;
 using UnityEngine;
 
 public class InteractionsManager : MonoBehaviour
