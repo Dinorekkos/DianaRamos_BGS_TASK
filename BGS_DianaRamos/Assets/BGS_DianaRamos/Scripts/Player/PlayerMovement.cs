@@ -21,11 +21,9 @@ namespace Dino.TopDown2D
         private Animator _animator;
         private string _horizontalAnim = "Horizontal";
         private string _verticalAnim = "Vertical";
-        // private string _lastHorizontalAnim = "LastHorizontal";
-        // private string _lastVerticalAnim = "LastVertical";
-        
-        
+       
         private bool _isMoving;
+        private bool _canMove = true;
         
         #endregion
 
@@ -37,16 +35,13 @@ namespace Dino.TopDown2D
 
         void FixedUpdate()
         {
+            if (!_canMove) return;
+            
             _movementVector2.Set(InputManager.MovementVector2.x, InputManager.MovementVector2.y);
             _rigidbody2D.velocity = _movementVector2 * _moveSpeed;
             
-            
-            
             if (_movementVector2 != Vector2.zero)
             {
-                // _animator.SetFloat(_lastHorizontalAnim, _movementVector2.x);
-                // _animator.SetFloat(_lastVerticalAnim, _movementVector2.y);
-                
                 _animator.SetFloat(_horizontalAnim, _movementVector2.x);
                 _animator.SetFloat(_verticalAnim, _movementVector2.y);
             }
@@ -55,5 +50,11 @@ namespace Dino.TopDown2D
             _animator.SetBool("Moving", _isMoving);
 
         }
+        
+        private void EnableMovement(bool enable)
+        {
+            _canMove = enable;
+        }
+       
     }
 }

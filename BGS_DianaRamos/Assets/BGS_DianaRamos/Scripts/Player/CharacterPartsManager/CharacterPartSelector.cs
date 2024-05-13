@@ -36,6 +36,8 @@ public class CharacterPartSelector : MonoBehaviour
     #region Public variables
     public string _testBodyPart; 
     public int _testCharacterPartData;
+    
+    public Action<Color> OnColorChange;
     public Action OnBodyPartUpdate;
     #endregion
     
@@ -58,38 +60,19 @@ public class CharacterPartSelector : MonoBehaviour
         }
     }
     
-    public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex)
+    public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex, Color color = default)
     {
-        // Buscar el índice de la parte del cuerpo que coincide con bodyPartName
         int bodyPartIndex = Array.FindIndex(bodyPartSelections, bp => bp.bodyPartName == bodyPartName);
-
-        // Validar si el índice es válido
         if (bodyPartIndex == -1)
         {
             Debug.Log($"No se encontró la parte del cuerpo: {bodyPartName}");
             return;
         }
 
-        // Cambiar el CharacterPartData de la parte del cuerpo al índice proporcionado
         bodyPartSelections[bodyPartIndex].bodyPartCurrentIndex = newCharacterPartDataIndex;
-
-        // Actualizar la parte del cuerpo en el CharacterPartsManager
         UpdateCurrentPart(bodyPartIndex);
     }
     
-    
-    private bool ValidateIndexValue(int partIndex)
-    {
-        if (partIndex > bodyPartSelections.Length || partIndex < 0)
-        {
-            Debug.Log("Index value does not match any body parts!");
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
     
     private void GetCurrentBodyParts(int partIndex)
     {
@@ -98,11 +81,11 @@ public class CharacterPartSelector : MonoBehaviour
         int currentBodyPartAnimationID = currentBodyPart.CharacterPartData.BodyPartAnimationID;
         currentBodyPartSelection.bodyPartCurrentIndex = currentBodyPartAnimationID;
         
-        Debug.Log("Current Body Part: ".SetColor("") + currentBodyPartSelection.bodyPartName + " : " + currentBodyPartAnimationID);
+        // Debug.Log("Current Body Part: ".SetColor("") + currentBodyPartSelection.bodyPartName + " : " + currentBodyPartAnimationID);
         
     }
     
-    private void UpdateCurrentPart(int partIndex)
+    private void UpdateCurrentPart(int partIndex, Color color = default)
     {
         BodyPartSelection currentSelection = bodyPartSelections[partIndex];
         int currentIndex = currentSelection.bodyPartCurrentIndex;
@@ -110,7 +93,8 @@ public class CharacterPartSelector : MonoBehaviour
         _characterBodyData.characterBodyParts[partIndex].CharacterPartData = currentPartData;
         
         OnBodyPartUpdate?.Invoke();
-        Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
+        OnColorChange?.Invoke(color);
+        // Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
         
     }
 

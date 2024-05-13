@@ -13,6 +13,10 @@ public class CharacterPartsManager : MonoBehaviour
     [SerializeField] private string[] bodyPartTypes;
     [SerializeField] private string[] characterStates;
     [SerializeField] private string[] characterDirections;
+    
+    [SerializeField] private SpriteRenderer _bodySpriteRenderer;
+    [SerializeField] private SpriteRenderer _hairSpriteRenderer;
+    [SerializeField] private SpriteRenderer _torsoSpriteRenderer;
     #endregion
 
     
@@ -22,6 +26,7 @@ public class CharacterPartsManager : MonoBehaviour
     private AnimationClip _animationClip;
     private AnimatorOverrideController _animatorOverrideController;
     private AnimationClipOverrides _defaultAnimationClips;
+   
 
     #endregion
 
@@ -34,6 +39,7 @@ public class CharacterPartsManager : MonoBehaviour
     private void Initialize()
     {
         _animator = GetComponent<Animator>();
+        
         _animatorOverrideController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
         _animator.runtimeAnimatorController = _animatorOverrideController;
         
@@ -67,8 +73,12 @@ public class CharacterPartsManager : MonoBehaviour
                 }
             }
         }
-        
         _animatorOverrideController.ApplyOverrides(_defaultAnimationClips);
+    }
+    
+    private void SetColor(Color color)
+    {
+        
     }
     
     #endregion
