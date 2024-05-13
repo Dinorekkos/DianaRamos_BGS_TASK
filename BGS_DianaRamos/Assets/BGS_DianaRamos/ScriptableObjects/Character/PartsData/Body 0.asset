@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Body 0
   m_EditorClassIdentifier: 
   BodyPartName: Body
-  BodyPartAnimationID: 1
+  BodyPartAnimationID: 0
   AllBodyPartAnimations:
   - {fileID: 7400000, guid: 34d223afac152cb4dade45d22df47511, type: 2}
   - {fileID: 7400000, guid: 4abb5e00394439f47a16055c0b66f373, type: 2}

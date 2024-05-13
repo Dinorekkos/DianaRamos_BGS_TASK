@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87c03b20cfe689f4198d0ad43e01ddd3, type: 3}
-  m_Name: Hair 2
+  m_Name: Hair 1
   m_EditorClassIdentifier: 
   BodyPartName: Short Hair
-  BodyPartAnimationID: 2
+  BodyPartAnimationID: 1
   AllBodyPartAnimations:
   - {fileID: 7400000, guid: 8e665adaa4420764f959482d3427e993, type: 2}
   - {fileID: 7400000, guid: a81a549d1a1203d418449448e99b3113, type: 2}

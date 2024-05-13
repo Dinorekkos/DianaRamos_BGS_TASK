@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Torso 1
   m_EditorClassIdentifier: 
   BodyPartName: Blue
-  BodyPartAnimationID: 2
+  BodyPartAnimationID: 1
   AllBodyPartAnimations:
   - {fileID: 7400000, guid: f0964e9e4b69a1440a9ba7480bf6e8c9, type: 2}
   - {fileID: 7400000, guid: 15d40dce720d7824e9eecedb6d58ff64, type: 2}

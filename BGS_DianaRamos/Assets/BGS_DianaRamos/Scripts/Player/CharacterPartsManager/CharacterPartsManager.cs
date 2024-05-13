@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterPartsManager : MonoBehaviour
 {
     
+    
+    
     #region Serialized Fields
     [Header("Character Body")]
     [SerializeField] private CharacterBodyData characterBodyData;
@@ -26,6 +28,11 @@ public class CharacterPartsManager : MonoBehaviour
     #region unity methods
     private void Start()
     {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         _animator = GetComponent<Animator>();
         _animatorOverrideController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
         _animator.runtimeAnimatorController = _animatorOverrideController;
@@ -34,20 +41,20 @@ public class CharacterPartsManager : MonoBehaviour
         _animatorOverrideController.GetOverrides(_defaultAnimationClips);
         
         SetBodyParts();
+        
+        CharacterPartSelector.Instance.OnBodyPartUpdate += SetBodyParts;
     }
+
     #endregion
 
 
     #region public methods
-    public void SetBodyParts()
+    private void SetBodyParts()
     {
-        // Override default animation clips with character body parts
         for (int partIndex = 0; partIndex < bodyPartTypes.Length; partIndex++)
         {
-            // Get current body part
             string partType = bodyPartTypes[partIndex];
-            // Get current body part ID
-            string partID = characterBodyData.characterBodyParts[partIndex].bodyPart.BodyPartAnimationID.ToString();
+            string partID = characterBodyData.characterBodyParts[partIndex].CharacterPartData.BodyPartAnimationID.ToString();
 
             for (int stateIndex = 0; stateIndex < characterStates.Length; stateIndex++)
             {
@@ -55,12 +62,7 @@ public class CharacterPartsManager : MonoBehaviour
                 for (int directionIndex = 0; directionIndex < characterDirections.Length; directionIndex++)
                 {
                     string direction = characterDirections[directionIndex];
-
-                    // Get players animation from player body
-                    // ***NOTE: Unless Changed Here, Animation Naming Must Be: "[Type]_[Index]_[state]_[direction]" (Ex. Body_0_idle_down)
                     _animationClip = Resources.Load<AnimationClip>("PlayerAnimations/" + partType + "/" + partType + "_" + partID + "_" + state + "_" + direction);
-
-                    // Override default animation
                     _defaultAnimationClips[partType + "_" + 0 + "_" + state + "_" + direction] = _animationClip;
                 }
             }
