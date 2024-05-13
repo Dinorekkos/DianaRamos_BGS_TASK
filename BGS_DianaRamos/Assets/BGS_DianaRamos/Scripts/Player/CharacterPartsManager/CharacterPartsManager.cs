@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterPartsManager : MonoBehaviour
 {
-
+    
     #region Serialized Fields
     [Header("Character Body")]
     [SerializeField] private CharacterBodyData characterBodyData;
@@ -22,15 +22,21 @@ public class CharacterPartsManager : MonoBehaviour
     private AnimationClipOverrides _defaultAnimationClips;
 
     #endregion
-    
-    void Start()
+
+    #region unity methods
+    private void Start()
     {
         _animator = GetComponent<Animator>();
         _animatorOverrideController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
         _animator.runtimeAnimatorController = _animatorOverrideController;
         
+        _defaultAnimationClips = new AnimationClipOverrides(_animatorOverrideController.overridesCount);
+        _animatorOverrideController.GetOverrides(_defaultAnimationClips);
+        
         SetBodyParts();
     }
+    #endregion
+
 
     #region public methods
     public void SetBodyParts()
@@ -52,32 +58,35 @@ public class CharacterPartsManager : MonoBehaviour
 
                     // Get players animation from player body
                     // ***NOTE: Unless Changed Here, Animation Naming Must Be: "[Type]_[Index]_[state]_[direction]" (Ex. Body_0_idle_down)
-                    _animationClip = Resources.Load<AnimationClip>("Player Animations/" + partType + "/" + partType + "_" + partID + "_" + state + "_" + direction);
+                    _animationClip = Resources.Load<AnimationClip>("PlayerAnimations/" + partType + "/" + partType + "_" + partID + "_" + state + "_" + direction);
 
                     // Override default animation
                     _defaultAnimationClips[partType + "_" + 0 + "_" + state + "_" + direction] = _animationClip;
                 }
             }
         }
+        
+        _animatorOverrideController.ApplyOverrides(_defaultAnimationClips);
     }
     
     #endregion
     
-    private class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
-    {
-        public AnimationClipOverrides(int capacity) : base(capacity) { }
+    
+}
 
-        public AnimationClip this[string name]
+public class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
+{
+    public AnimationClipOverrides(int capacity) : base(capacity) { }
+
+    public AnimationClip this[string name]
+    {
+        get { return this.Find(x => x.Key.name.Equals(name)).Value; }
+        set
         {
-            get { return this.Find(x => x.Key.name.Equals(name)).Value; }
-            set
-            {
-                int index = this.FindIndex(x => x.Key.name.Equals(name));
-                if (index != -1)
-                    this[index] = new KeyValuePair<AnimationClip, AnimationClip>(this[index].Key, value);
-            }
+            int index = this.FindIndex(x => x.Key.name.Equals(name));
+            if (index != -1)
+                this[index] = new KeyValuePair<AnimationClip, AnimationClip>(this[index].Key, value);
         }
     }
 }
-
 
