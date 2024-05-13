@@ -20,6 +20,6 @@ public class ItemData
 [System.Serializable]
 public class TypesItems
 {
-    public ClotheStoreUI.ClotheType clotheType;
+    public ClotheType clotheType;
     public List<ItemData> items;
 }

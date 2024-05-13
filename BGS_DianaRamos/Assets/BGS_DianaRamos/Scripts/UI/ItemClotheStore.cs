@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DINO.TopDown2D.BSG;
@@ -16,14 +17,21 @@ public class ItemClotheStore : MonoBehaviour
     #endregion
     
     #region private variables
-    private ClotheStoreUI.ClotheType _clotheType;
+    private ClotheType _clotheType;
     private string _itemID; 
     private int _itemPrice;
     #endregion
     
     #region public methods
-    
-    public void Initialize(string itemID, Sprite itemSprite, int itemPrice, ClotheStoreUI.ClotheType clotheType)
+
+    private void Start()
+    {
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnButtonClicked);
+
+    }
+
+    public void Initialize(string itemID, Sprite itemSprite, int itemPrice, ClotheType clotheType)
     {
         _itemID = itemID;
         _icon.sprite = itemSprite;
@@ -31,13 +39,12 @@ public class ItemClotheStore : MonoBehaviour
         _itemCost.text = itemPrice.ToString();
         _clotheType = clotheType;
         
-        _button.onClick.AddListener(OnButtonClicked);
-        
         UpdateButtonState();
     }
 
     private void UpdateButtonState()
     {
+        if(_button == null) _button = GetComponent<Button>();
         _button.interactable = CurrencyManager.Instance.CanAfford(_itemPrice);
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DINO.TopDown2D.BSG;
 using DINO.Utility;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class ClotheStoreUI : MenuWindow
 {
     #region Serialized Fields
     [SerializeField] private ItemStoreData _itemStoreData;
+    // [SerializeField] private TextMeshProUGUI _currencyText;
 
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _hairTab;
@@ -22,7 +24,7 @@ public class ClotheStoreUI : MenuWindow
     [SerializeField] private List<ItemClotheStore> _torsoItems = new List<ItemClotheStore>();
 
     #endregion
-    private ClotheType _currentClotheType;
+    private ClotheType _currentClotheType = ClotheType.Torso;
 
     
     protected override void Initialize()
@@ -32,7 +34,19 @@ public class ClotheStoreUI : MenuWindow
 
         _hairTab.onClick.AddListener(() => ChangeTab(ClotheType.Hair));
         _torsoTab.onClick.AddListener(() => ChangeTab(ClotheType.Torso));
+        InitializeItems();
+        UpdateTabContent();
         
+        // UpdateCurrencyText(CurrencyManager.Instance.Currency);
+        // CurrencyManager.Instance.OnCurrencyChanged += UpdateCurrencyText;
+        
+
+        
+    }
+
+    private void UpdateCurrencyText(int currency)
+    {
+        // _currencyText.text = currency.ToString();
     }
 
     private void CloseWindow()
@@ -101,10 +115,11 @@ public class ClotheStoreUI : MenuWindow
 
     }
 
-    public enum ClotheType
-    {
+   
+}
+public enum ClotheType
+{
 
-        Hair,
-        Torso,
-    }
+    Hair,
+    Torso,
 }
