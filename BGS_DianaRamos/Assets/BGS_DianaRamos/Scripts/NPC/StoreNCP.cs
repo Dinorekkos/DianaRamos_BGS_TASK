@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 public class StoreNCP : InteractionObject
 {
     [SerializeField] private string _UIName = "clothe.store";
+    [SerializeField] private DialogueContainer _dialogueContainer;
     
     protected override void Interact()
     {        
@@ -20,6 +21,8 @@ public class StoreNCP : InteractionObject
         PlayerMovement.Instance.EnableMovement(false);
         Vector2 directionDown = new Vector2(0, -1);
         PlayerMovement.Instance.SetAnimToFixedDirection(directionDown);
+        
+        DialogueManager.Instance.StartDialogue(_dialogueContainer);
     }
   
     

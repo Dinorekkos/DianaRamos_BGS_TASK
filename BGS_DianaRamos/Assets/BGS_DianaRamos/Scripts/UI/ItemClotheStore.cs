@@ -55,7 +55,7 @@ public class ItemClotheStore : MonoBehaviour
         UpdateButtonState();
     }
 
-    private void UpdateButtonState()
+    public void UpdateButtonState()
     {
         if(_button == null) _button = GetComponent<Button>();
 

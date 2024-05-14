@@ -75,6 +75,17 @@ public class ClotheStoreUI : MenuWindow
                 _torsoTabContent.SetActive(true);
                 break;
         }
+
+        foreach (var buttonHair in _hairItems)
+        {
+            buttonHair.UpdateButtonState();
+        }
+
+        foreach (var buttonTorso in _torsoItems)
+        {
+            buttonTorso.UpdateButtonState();
+        }
+        
     }
 
     private void InitializeItems()
