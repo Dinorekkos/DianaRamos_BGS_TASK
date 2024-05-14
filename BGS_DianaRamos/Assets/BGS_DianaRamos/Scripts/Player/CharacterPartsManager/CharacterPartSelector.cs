@@ -77,14 +77,9 @@ namespace DINO.TopDown2D.BSG
                 Debug.Log($"Error no body part: {bodyPartName}");
                 return;
             }
-
             bodyPartSelections[bodyPartIndex].bodyPartCurrentIndex = newCharacterPartDataIndex;
             ClotheType clotheType = (ClotheType) Enum.Parse(typeof(ClotheType), bodyPartName);
-            
             UpdateCurrentPart(bodyPartIndex, clotheType);
-
-            
-            
         }
 
 
@@ -94,9 +89,6 @@ namespace DINO.TopDown2D.BSG
             BodyPart currentBodyPart = _characterBodyData.characterBodyParts[partIndex];
             int currentBodyPartAnimationID = currentBodyPart.CharacterPartData.BodyPartAnimationID;
             currentBodyPartSelection.bodyPartCurrentIndex = currentBodyPartAnimationID;
-
-            // Debug.Log("Current Body Part: ".SetColor("") + currentBodyPartSelection.bodyPartName + " : " + currentBodyPartAnimationID);
-
         }
 
         private void UpdateCurrentPart(int partIndex, ClotheType clotheType)
@@ -105,10 +97,7 @@ namespace DINO.TopDown2D.BSG
             int currentIndex = currentSelection.bodyPartCurrentIndex;
             CharacterPartData currentPartData = currentSelection.CharacterPartOptions[currentIndex];
             _characterBodyData.characterBodyParts[partIndex].CharacterPartData = currentPartData;
-
             OnBodyPartUpdate?.Invoke(clotheType);
-            // Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
-
         }
 
 

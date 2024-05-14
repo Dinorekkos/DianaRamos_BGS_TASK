@@ -21,7 +21,6 @@ namespace DINO.TopDown2D.BSG
         private void OnDisable()
         {
             ResetDialogues();
-            
         }
     }
 

@@ -36,7 +36,7 @@ namespace DINO.TopDown2D.BSG
             foreach (char character in dialogue.Text.ToCharArray())
             {
                 _dialogueText.text += character;
-                yield return new WaitForSeconds(0.05f); // Ajusta este valor para cambiar la velocidad del efecto de escritura
+                yield return new WaitForSeconds(0.05f);
             }
         }
 

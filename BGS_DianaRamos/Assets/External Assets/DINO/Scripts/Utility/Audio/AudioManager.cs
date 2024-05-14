@@ -143,8 +143,6 @@ namespace DINO.Utility.Audio
             {
                 audioSource.Play();
             }
-            
-            // Debug.Log("Playing sound: " + soundName);
         }
         
         public void StopSound(string soundName)

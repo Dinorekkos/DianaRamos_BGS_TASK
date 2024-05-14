@@ -66,7 +66,6 @@ public class ItemClotheStore : MonoBehaviour
         if (!_isPurchased)
         {
             _button.interactable = CurrencyManager.Instance.CanAfford(_itemPrice);
-            // Debug.Log("Can afford: " + CurrencyManager.Instance.CanAfford(_itemPrice) + _itemID);
             _purchasedIcon.SetActive(false);
         }
         else

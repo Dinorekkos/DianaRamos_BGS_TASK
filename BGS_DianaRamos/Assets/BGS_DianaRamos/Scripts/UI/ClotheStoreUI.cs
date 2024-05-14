@@ -122,12 +122,8 @@ public class ClotheStoreUI : MenuWindow
         foreach (var item in _hairItems)
         {
             item.SetColor(color);
-            
-            // if (!item.CanAfford()) return;
-                
             ButtonOptimizedAnim buttonOptimizedAnim = item.GetComponent<ButtonOptimizedAnim>();
             buttonOptimizedAnim.GetTargetColors();
-            // buttonOptimizedAnim.ResetNormalColor(Color.white);
         }
     }
         
