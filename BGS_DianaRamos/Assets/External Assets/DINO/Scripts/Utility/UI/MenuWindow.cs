@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using DINO.Utility.Audio;
 using UnityEngine;
 
 namespace DINO.Utility
@@ -68,6 +69,8 @@ namespace DINO.Utility
             {
                 OnFinishedShowingWindow?.Invoke();
             });
+            
+            AudioManager.Instance.PlaySound(AudioKeys.OPEN_WINDOW);
         }
 
         public virtual void HideWindow()
@@ -78,6 +81,8 @@ namespace DINO.Utility
                 canvas.enabled = false;
                 OnFinishedHideWindow?.Invoke();
             });
+            
+            AudioManager.Instance.PlaySound(AudioKeys.CLOSE_WINDOW);
         }
 
         #endregion

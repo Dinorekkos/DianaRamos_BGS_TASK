@@ -11,7 +11,6 @@ public class ClotheStoreUI : MenuWindow
 {
     #region Serialized Fields
     [SerializeField] private ItemStoreData _itemStoreData;
-    // [SerializeField] private TextMeshProUGUI _currencyText;
 
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _hairTab;
@@ -37,16 +36,7 @@ public class ClotheStoreUI : MenuWindow
         InitializeItems();
         UpdateTabContent();
         
-        // UpdateCurrencyText(CurrencyManager.Instance.Currency);
-        // CurrencyManager.Instance.OnCurrencyChanged += UpdateCurrencyText;
         
-
-        
-    }
-
-    private void UpdateCurrencyText(int currency)
-    {
-        // _currencyText.text = currency.ToString();
     }
 
     private void CloseWindow()
@@ -84,6 +74,17 @@ public class ClotheStoreUI : MenuWindow
                 _torsoTabContent.SetActive(true);
                 break;
         }
+
+        foreach (var buttonHair in _hairItems)
+        {
+            buttonHair.UpdateButtonState();
+        }
+
+        foreach (var buttonTorso in _torsoItems)
+        {
+            buttonTorso.UpdateButtonState();
+        }
+        
     }
 
     private void InitializeItems()
@@ -115,6 +116,17 @@ public class ClotheStoreUI : MenuWindow
         }
 
     }
+
+    public void SetHairsColor(Color color)
+    {
+        foreach (var item in _hairItems)
+        {
+            item.SetColor(color);
+            ButtonOptimizedAnim buttonOptimizedAnim = item.GetComponent<ButtonOptimizedAnim>();
+            buttonOptimizedAnim.GetTargetColors();
+        }
+    }
+        
 
    
 }

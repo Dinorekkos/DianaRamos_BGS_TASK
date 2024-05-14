@@ -12,6 +12,7 @@ public class GemMine : InteractionObject
     [SerializeField] private Slider _slider;
     [SerializeField] private float _timeToMine = 5;
     [SerializeField] private int _gemsToMine = 1;
+    [SerializeField] private GameObject _mineEffect;
 
     private TimerBase _timer;
     
@@ -25,6 +26,7 @@ public class GemMine : InteractionObject
         
         SetSlider();
         _slider.gameObject.SetActive(false);
+        _mineEffect.SetActive(false);
     }
 
     protected override void Interact()
@@ -34,6 +36,7 @@ public class GemMine : InteractionObject
         base.Interact();
         _slider.gameObject.SetActive(true);
         _timer.StartTimer(_timeToMine, "", true);
+        _mineEffect.SetActive(true);
         
         // Debug.Log("Interacting with Gem Mine");
     }
@@ -55,7 +58,7 @@ public class GemMine : InteractionObject
 
     private void SetSlider()
     {
-        _slider.maxValue = _timeToMine;
+        _slider.maxValue = _timeToMine + 1;
         _slider.value = _timeToMine;
     }
 
@@ -65,6 +68,8 @@ public class GemMine : InteractionObject
         CurrencyManager.Instance.AddCurrency(_gemsToMine);
         notification.SetActive(true);
         _timer.StopTimer();
+        _mineEffect.SetActive(false);
+
     }
     
     private void OnTimerStart()

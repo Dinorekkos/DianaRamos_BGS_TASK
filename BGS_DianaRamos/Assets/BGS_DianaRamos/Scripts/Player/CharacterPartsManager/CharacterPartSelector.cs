@@ -45,7 +45,7 @@ namespace DINO.TopDown2D.BSG
         public string _testBodyPart;
         public int _testCharacterPartData;
 
-        public Action<Color> OnColorChange;
+        public Action<Color> OnHairColorChange;
         public Action<ClotheType> OnBodyPartUpdate;
 
         #endregion
@@ -69,7 +69,7 @@ namespace DINO.TopDown2D.BSG
             }
         }
 
-        public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex, Color color = default)
+        public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex)
         {
             int bodyPartIndex = Array.FindIndex(bodyPartSelections, bp => bp.bodyPartName == bodyPartName);
             if (bodyPartIndex == -1)
@@ -77,14 +77,9 @@ namespace DINO.TopDown2D.BSG
                 Debug.Log($"Error no body part: {bodyPartName}");
                 return;
             }
-
             bodyPartSelections[bodyPartIndex].bodyPartCurrentIndex = newCharacterPartDataIndex;
             ClotheType clotheType = (ClotheType) Enum.Parse(typeof(ClotheType), bodyPartName);
-            
-            UpdateCurrentPart(bodyPartIndex, clotheType, color);
-
-            
-            
+            UpdateCurrentPart(bodyPartIndex, clotheType);
         }
 
 
@@ -94,22 +89,15 @@ namespace DINO.TopDown2D.BSG
             BodyPart currentBodyPart = _characterBodyData.characterBodyParts[partIndex];
             int currentBodyPartAnimationID = currentBodyPart.CharacterPartData.BodyPartAnimationID;
             currentBodyPartSelection.bodyPartCurrentIndex = currentBodyPartAnimationID;
-
-            // Debug.Log("Current Body Part: ".SetColor("") + currentBodyPartSelection.bodyPartName + " : " + currentBodyPartAnimationID);
-
         }
 
-        private void UpdateCurrentPart(int partIndex, ClotheType clotheType, Color color = default)
+        private void UpdateCurrentPart(int partIndex, ClotheType clotheType)
         {
             BodyPartSelection currentSelection = bodyPartSelections[partIndex];
             int currentIndex = currentSelection.bodyPartCurrentIndex;
             CharacterPartData currentPartData = currentSelection.CharacterPartOptions[currentIndex];
             _characterBodyData.characterBodyParts[partIndex].CharacterPartData = currentPartData;
-
             OnBodyPartUpdate?.Invoke(clotheType);
-            OnColorChange?.Invoke(color);
-            // Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
-
         }
 
 

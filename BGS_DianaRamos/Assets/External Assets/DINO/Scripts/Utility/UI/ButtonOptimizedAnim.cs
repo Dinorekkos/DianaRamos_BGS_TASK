@@ -15,6 +15,8 @@ namespace DINO.Utility
         #endregion
 
         #region private variables
+        
+        public  Color normalColor = Color.white;
         private static Color defaultDisabledColor = new Color(0.78f, 0.78f, 0.78f, 0.5f);
         private static Vector3 disabledScale = Vector3.one;
         private static Vector3 highlightedScale = Vector3.one;
@@ -34,8 +36,24 @@ namespace DINO.Utility
                 _normalColors[i] = targetImages[i].color;
                 _disabledColors[i] = defaultDisabledColor;
             }
+            
+            normalColor = _normalColors[0];
         }
-
+        
+        public void ResetNormalColor(Color color)
+        {
+            normalColor = color;
+            _normalColors = new Color[targetImages.Length];
+            _disabledColors = new Color[targetImages.Length];
+            
+            for (int i = 0; i < targetImages.Length; i++)
+            {
+                _normalColors[i] = color;
+                _disabledColors[i] = defaultDisabledColor;
+            }
+        }
+        
+        
         #endregion
 
         #region public properties

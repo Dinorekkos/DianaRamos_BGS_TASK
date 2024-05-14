@@ -45,7 +45,10 @@ namespace DINO.Utility.Audio
         
         private GameObject _soundsContainer;
         private List<AudioSource> _audioSources = new List<AudioSource>();
-
+        
+        private List<AudioData> _sfxAudioData = new List<AudioData>();
+        private List<AudioData> _musicAudioData = new List<AudioData>();
+        
         #endregion
 
         public AudioManagerData AudioManagerData
@@ -53,6 +56,10 @@ namespace DINO.Utility.Audio
             get => _audioManagerData;
             set => _audioManagerData = value;
         }
+        
+        public bool IsInitialized { get; private set; }
+
+        public Action OnFinishedInitialize;
 
         #region unity methods
         private void Awake()
@@ -62,10 +69,10 @@ namespace DINO.Utility.Audio
 
         private void Start()
         {
-            _soundsContainer = new GameObject("SoundsContainer");
-            _audioSources = new List<AudioSource>();
-            _soundsContainer.transform.SetParent(transform);
+            Initialize();
         }
+
+        
         #endregion
 
         #region private methods
@@ -87,6 +94,22 @@ namespace DINO.Utility.Audio
         private AudioSource FindAudioSource(AudioClip clip)
         {
             return _audioSources.Find(x => x.clip == clip);
+        }
+        private void Initialize()
+        {
+            _soundsContainer = new GameObject("SoundsContainer");
+            _audioSources = new List<AudioSource>();
+            _soundsContainer.transform.SetParent(transform);
+            PrepareLists();
+            IsInitialized = true;
+            OnFinishedInitialize?.Invoke();
+        }
+
+        
+        private void  PrepareLists()
+        {
+            _sfxAudioData = _audioManagerData.audioData.FindAll(x => x.audioType == AudioType.SFX);
+            _musicAudioData = _audioManagerData.audioData.FindAll(x => x.audioType == AudioType.Music);
         }
 
         #endregion
@@ -120,8 +143,6 @@ namespace DINO.Utility.Audio
             {
                 audioSource.Play();
             }
-            
-            // Debug.Log("Playing sound: " + soundName);
         }
         
         public void StopSound(string soundName)

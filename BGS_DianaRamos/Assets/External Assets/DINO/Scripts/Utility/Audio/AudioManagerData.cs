@@ -9,6 +9,13 @@ namespace DINO.Utility.Audio
     public class AudioManagerData : ScriptableObject
     {
         public List<AudioData> audioData = new List<AudioData>();
+        
+        public AudioData GetAudioData(string name)
+        {
+            return audioData.Find(x => x.name == name);
+        }
+        
+        
     }
     
     
@@ -20,5 +27,14 @@ namespace DINO.Utility.Audio
         public bool loop = false;
         public float volume = 1f;
         public float pitch = 1f;
+        public AudioType audioType;
+    }
+    
+    
+    public enum AudioType
+    {
+        Music,
+        SFX,
+        Ambience
     }
 }

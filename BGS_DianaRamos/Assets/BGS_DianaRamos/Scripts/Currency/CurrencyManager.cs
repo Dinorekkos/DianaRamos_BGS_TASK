@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DINO.Utility.Audio;
 using UnityEngine;
 
 namespace DINO.TopDown2D.BSG
@@ -45,6 +46,9 @@ namespace DINO.TopDown2D.BSG
             Currency += amount;
             OnCurrencyChanged?.Invoke(Currency);
             CountCoins();
+            
+            AudioManager.Instance.PlaySound(AudioKeys.COIN);
+            
         }
 
         public void SpendCurrency(int amount)

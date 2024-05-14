@@ -55,6 +55,7 @@ namespace DINO.TopDown2D.BSG
             SetBodyParts();
 
             CharacterPartSelector.Instance.OnBodyPartUpdate += SetBodyParts;
+            CharacterPartSelector.Instance.OnHairColorChange += SetHairColor;
             
             EnableHairRenderer(false);
             EnableTorsoRenderer(false);
@@ -72,9 +73,9 @@ namespace DINO.TopDown2D.BSG
             _torsoSpriteRenderer.enabled = enable;
         }
 
-        private void SetColor(Color color)
+        private void SetHairColor(Color color)
         {
-
+            _hairSpriteRenderer.color = color;
         }
         
         private void SetBodyParts(ClotheType clotheType = default)
