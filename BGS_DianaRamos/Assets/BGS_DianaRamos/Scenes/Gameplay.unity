@@ -6416,8 +6416,8 @@ Transform:
   m_Children:
   - {fileID: 1355542249}
   - {fileID: 1889366132}
-  - {fileID: 442296453}
   - {fileID: 257231363}
+  - {fileID: 442296453}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &887802643
@@ -10090,7 +10090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8754e4b61f4add3468703a385d391b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialCurrency: 10
+  initialCurrency: 0
   rewardManager: {fileID: 2006566576}
 --- !u!114 &2006566576
 MonoBehaviour:
@@ -10845,7 +10845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7747304867157418780, guid: de7690085363213408e5cdf69a6d75da, type: 3}
       propertyPath: _gemsToMine
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7747304867157418780, guid: de7690085363213408e5cdf69a6d75da, type: 3}
       propertyPath: _timeToMine

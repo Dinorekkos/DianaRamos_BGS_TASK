@@ -69,7 +69,7 @@ namespace DINO.TopDown2D.BSG
             }
         }
 
-        public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex, Color hairColor = default)
+        public void ChangeBodyPart(string bodyPartName, int newCharacterPartDataIndex)
         {
             int bodyPartIndex = Array.FindIndex(bodyPartSelections, bp => bp.bodyPartName == bodyPartName);
             if (bodyPartIndex == -1)
@@ -81,7 +81,7 @@ namespace DINO.TopDown2D.BSG
             bodyPartSelections[bodyPartIndex].bodyPartCurrentIndex = newCharacterPartDataIndex;
             ClotheType clotheType = (ClotheType) Enum.Parse(typeof(ClotheType), bodyPartName);
             
-            UpdateCurrentPart(bodyPartIndex, clotheType, hairColor);
+            UpdateCurrentPart(bodyPartIndex, clotheType);
 
             
             
@@ -99,7 +99,7 @@ namespace DINO.TopDown2D.BSG
 
         }
 
-        private void UpdateCurrentPart(int partIndex, ClotheType clotheType, Color color = default)
+        private void UpdateCurrentPart(int partIndex, ClotheType clotheType)
         {
             BodyPartSelection currentSelection = bodyPartSelections[partIndex];
             int currentIndex = currentSelection.bodyPartCurrentIndex;
@@ -107,7 +107,6 @@ namespace DINO.TopDown2D.BSG
             _characterBodyData.characterBodyParts[partIndex].CharacterPartData = currentPartData;
 
             OnBodyPartUpdate?.Invoke(clotheType);
-            OnHairColorChange?.Invoke(color);
             // Debug.Log("Updated Body Part: ".SetColor("") + currentSelection.bodyPartName + " : " + currentIndex);
 
         }
