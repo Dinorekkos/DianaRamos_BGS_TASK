@@ -1309,6 +1309,7 @@ MonoBehaviour:
   _disabledColors:
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &340576474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2017,6 +2018,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   _disabledColors:
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &486269751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6442,6 +6444,7 @@ MonoBehaviour:
   _disabledColors:
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &887421620
 GameObject:
   m_ObjectHideFlags: 0
@@ -8629,6 +8632,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   _disabledColors:
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1383375030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9926,6 +9930,7 @@ MonoBehaviour:
   _disabledColors:
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
   - {r: 0.78, g: 0.78, b: 0.78, a: 0.5}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1812710513
 MonoBehaviour:
   m_ObjectHideFlags: 0
