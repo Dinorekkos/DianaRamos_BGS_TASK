@@ -51,6 +51,10 @@ public class MenuManager : MonoBehaviour
     {
         window.ShowWindow();
     }
+    public void CloseWindow(MenuWindow window)
+    {
+        window.HideWindow();
+    }
     
     
     public MenuWindow GetWindow(string windowName)

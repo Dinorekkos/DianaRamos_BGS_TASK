@@ -13,13 +13,39 @@ MonoBehaviour:
   m_Name: AudioManagerData
   m_EditorClassIdentifier: 
   audioData:
-  - name: Min_Window
+  - name: CloseWindow
     clip: {fileID: 8300000, guid: 3275806ed7aac8543a92c2c990b3a3b8, type: 3}
     loop: 0
     volume: 1
     pitch: 1
-  - name: Max_Window
+    audioType: 1
+  - name: OpenWindow
     clip: {fileID: 8300000, guid: 61cc90d8ffb892745963c7b58b3969d0, type: 3}
     loop: 0
     volume: 1
     pitch: 1
+    audioType: 1
+  - name: MainMusic
+    clip: {fileID: 8300000, guid: 221d406c6de02a64ba47a67b0cf5219d, type: 3}
+    loop: 1
+    volume: 0.5
+    pitch: 1
+    audioType: 0
+  - name: Coin
+    clip: {fileID: 8300000, guid: ef3e924dee9ca9746b8fb44e422b9582, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioType: 1
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: 525f508d70e01154ebb36b3fa4b9dceb, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioType: 1
+  - name: Speak
+    clip: {fileID: 8300000, guid: 525f508d70e01154ebb36b3fa4b9dceb, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioType: 1

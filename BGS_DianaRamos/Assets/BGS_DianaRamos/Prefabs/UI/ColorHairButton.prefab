@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 7692608244414538886}
   - component: {fileID: 4490415539493999203}
   - component: {fileID: 1710126068541403283}
+  - component: {fileID: 931638041024432125}
   m_Layer: 5
   m_Name: ColorHairButton
   m_TagString: Untagged
@@ -212,3 +213,16 @@ MonoBehaviour:
   _clotheStoreUI: {fileID: 0}
   _colorHair: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
   _button: {fileID: 4490415539493999203}
+--- !u!114 &931638041024432125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916752731044854364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bf87b50dce4d34abfb81277ca9efcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioName: ButtonClick

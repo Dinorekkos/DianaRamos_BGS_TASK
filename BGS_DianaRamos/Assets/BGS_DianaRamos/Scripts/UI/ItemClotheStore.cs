@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DINO.TopDown2D.BSG;
+using DINO.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,8 +25,8 @@ public class ItemClotheStore : MonoBehaviour
     private string _itemID; 
     private int _itemPrice;
     private int _itemIndex;
-    private Color _color;
-    private bool _isPurchased;
+    private Color _color = Color.white;
+    private bool _isPurchased = false;
     #endregion
     
     #region public methods
@@ -38,8 +39,6 @@ public class ItemClotheStore : MonoBehaviour
         _isPurchased = false;
         _purchasedIcon.SetActive(false);
         
-        
-        if(_clotheType == ClotheType.Hair) _color = _icon.color;
     }
 
     public void Initialize(string itemID, Sprite itemSprite, int itemPrice, ClotheType clotheType, int itemIndex)
@@ -51,17 +50,23 @@ public class ItemClotheStore : MonoBehaviour
         _clotheType = clotheType;
         _itemIndex = itemIndex;
         
-        
         UpdateButtonState();
     }
 
     public void UpdateButtonState()
     {
         if(_button == null) _button = GetComponent<Button>();
-
+        
+        ButtonOptimizedAnim buttonOptimizedAnim = gameObject.GetComponent<ButtonOptimizedAnim>();
+        if (buttonOptimizedAnim != null)
+        {
+            buttonOptimizedAnim.ResetNormalColor(Color.white);
+        }
+        
         if (!_isPurchased)
         {
             _button.interactable = CurrencyManager.Instance.CanAfford(_itemPrice);
+            // Debug.Log("Can afford: " + CurrencyManager.Instance.CanAfford(_itemPrice) + _itemID);
             _purchasedIcon.SetActive(false);
         }
         else
@@ -70,6 +75,9 @@ public class ItemClotheStore : MonoBehaviour
             _purchasedIcon.SetActive(true);
             _cost.SetActive(false);
         }
+        
+      
+
     }
     
 
@@ -91,6 +99,11 @@ public class ItemClotheStore : MonoBehaviour
 
     }
 
+    
+    public bool CanAfford()
+    {
+        return CurrencyManager.Instance.CanAfford(_itemPrice);
+    }
     #endregion
 
     public void SetColor(Color color)

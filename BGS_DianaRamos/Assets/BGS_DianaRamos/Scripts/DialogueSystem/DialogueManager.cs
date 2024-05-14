@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DINO.Utility.Audio;
 using UnityEngine;
 
 namespace DINO.TopDown2D.BSG
@@ -61,6 +62,8 @@ namespace DINO.TopDown2D.BSG
             {
                 dialogue.isEndDialogue = true;
             }
+            
+            AudioManager.Instance.PlaySound(AudioKeys.SPEAK);
         }
     }
 }

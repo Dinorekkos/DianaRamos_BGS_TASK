@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 895202693508425738}
   - component: {fileID: 8951455247260620196}
   - component: {fileID: 1362616523578374420}
+  - component: {fileID: 7593217771176908127}
   m_Layer: 5
   m_Name: ButtonStore
   m_TagString: Untagged
@@ -289,6 +290,19 @@ MonoBehaviour:
   _button: {fileID: 8951455247260620196}
   _purchasedIcon: {fileID: 4932598160785080754}
   _cost: {fileID: 8797187678258578839}
+--- !u!114 &7593217771176908127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401852599953405024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bf87b50dce4d34abfb81277ca9efcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioName: ButtonClick
 --- !u!1 &3417553823480184972
 GameObject:
   m_ObjectHideFlags: 0

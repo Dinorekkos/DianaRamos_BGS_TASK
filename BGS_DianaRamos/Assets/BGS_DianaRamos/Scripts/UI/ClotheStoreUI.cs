@@ -11,7 +11,6 @@ public class ClotheStoreUI : MenuWindow
 {
     #region Serialized Fields
     [SerializeField] private ItemStoreData _itemStoreData;
-    // [SerializeField] private TextMeshProUGUI _currencyText;
 
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _hairTab;
@@ -123,8 +122,12 @@ public class ClotheStoreUI : MenuWindow
         foreach (var item in _hairItems)
         {
             item.SetColor(color);
+            
+            // if (!item.CanAfford()) return;
+                
             ButtonOptimizedAnim buttonOptimizedAnim = item.GetComponent<ButtonOptimizedAnim>();
             buttonOptimizedAnim.GetTargetColors();
+            // buttonOptimizedAnim.ResetNormalColor(Color.white);
         }
     }
         
