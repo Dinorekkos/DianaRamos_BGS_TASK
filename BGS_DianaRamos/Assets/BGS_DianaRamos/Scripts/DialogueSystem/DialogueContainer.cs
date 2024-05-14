@@ -11,7 +11,7 @@ namespace DINO.TopDown2D.BSG
     {
         public List<Dialogue> dialogues;
 
-        private void ResetDialogues()
+        public void ResetDialogues()
         {
             foreach (var dialogue in dialogues)
             {

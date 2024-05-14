@@ -31,6 +31,8 @@ namespace DINO.TopDown2D.BSG
         }
         
         public Action<Dialogue> OnDialogueStart;
+        
+        public List<DialogueContainer> dialogues = new List<DialogueContainer>();
 
         private void Awake()
         {
@@ -39,7 +41,10 @@ namespace DINO.TopDown2D.BSG
 
         void Start()
         {
-
+            foreach (var dialogueContainer in dialogues)
+            {
+                dialogueContainer.ResetDialogues();
+            }
         }
 
         public void StartDialogue(DialogueContainer dialogueContainer)
